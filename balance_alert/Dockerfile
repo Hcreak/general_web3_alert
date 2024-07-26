@@ -6,4 +6,4 @@ RUN pip3 install -r requirements.txt
 WORKDIR /app
 ADD *.py ./
 
-# CMD python3 -u main.py
+CMD python3 -u balance_alert.py
