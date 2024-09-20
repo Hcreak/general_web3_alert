@@ -5,9 +5,10 @@ from datetime import timedelta,datetime
 target_address = os.getenv("target_address")
 interval_minute = timedelta(minutes=int(os.getenv("interval_minute")))
 slack_bot_webhook = os.getenv("slack_bot_webhook")
+etherscan_url = os.getenv("etherscan_url") if os.getenv("etherscan_url") else "https://api.etherscan.io/api"
 etherscan_api_key = os.getenv("etherscan_api_key")
 
-r = requests.get("https://api.etherscan.io/api?module=account&action=txlist&address={}&page=1&offset=1&sort=desc&apikey={}".format(target_address,etherscan_api_key))
+r = requests.get("{}?module=account&action=txlist&address={}&page=1&offset=1&sort=desc&apikey={}".format(etherscan_url,target_address,etherscan_api_key))
 last_tx = r.json()["result"][0] 
 print(last_tx)
 
