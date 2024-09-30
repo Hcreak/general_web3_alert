@@ -28,6 +28,6 @@ print("")
 print(f"\thead_l1 - current_l1: {diff}")
 
 if diff > diff_alert:
-    alert_text = "head_l1 - current_l1 too high!"
+    alert_text = "head_l1 - current_l1 too high! (*{}*)".format(diff)
     print(alert_text)
     requests.post(slack_bot_webhook, json={"text": alert_text})
