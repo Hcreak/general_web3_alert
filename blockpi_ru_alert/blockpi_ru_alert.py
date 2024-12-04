@@ -3,7 +3,8 @@ import os
 
 blockpi_apikey = os.getenv("blockpi_apikey")
 balance_alert = int(os.getenv("balance_alert"))
-slack_bot_webhook = os.getenv("slack_bot_webhook")
+tg_bot_token = os.getenv("tg_bot_token")
+tg_bot_chatid = os.getenv("tg_bot_chatid")
 
 blockpi_ruBalance_body = {
     "jsonrpc": "2.0",
@@ -23,4 +24,4 @@ print(ru_balance)
 if ru_balance < balance_alert:
     alert_text = "BlockPi RU Packet has Low Balance! (*{}*)".format(ru_balance)
     print(alert_text)
-    requests.post(slack_bot_webhook, json={"text": alert_text})
+    requests.post("https://api.telegram.org/bot{}/sendMessage".format(tg_bot_token), data={'chat_id':tg_bot_chatid, 'text':alert_text, 'parse_mode':'Markdown'})
